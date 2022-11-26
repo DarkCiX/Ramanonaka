@@ -15,12 +15,13 @@ modules=true
 [application]
 
 config/name="Magic Balls"
-run/main_scene="res://scenes/Map.tscn"
+run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Network="*res://scripts/network.gd"
+Global="*res://scripts/global.gd"
 
 [gui]
 
