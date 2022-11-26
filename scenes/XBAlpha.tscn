@@ -1,0 +1,153 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://data/textures/XBAlpha.gltf" type="PackedScene" id=1]
+[ext_resource path="res://scripts/XBAlpha.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.4
+height = 1.1
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=57]
+animation = "Jumping-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Running Backward-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Running Jump-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Pick Up Item (2)-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "left strafe-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "right strafe-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Goalkeeper Overhand Throw-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "running-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Throwing-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/Idle/node = SubResource( 11 )
+states/Idle/position = Vector2( 611, 232 )
+states/Jumping/node = SubResource( 57 )
+states/Jumping/position = Vector2( 899, 142 )
+states/Running/node = SubResource( 7 )
+states/Running/position = Vector2( 617, 142 )
+"states/Running Backward/node" = SubResource( 3 )
+"states/Running Backward/position" = Vector2( 611, 355.786 )
+"states/Running Jump/node" = SubResource( 4 )
+"states/Running Jump/position" = Vector2( 617, 19 )
+"states/Running Pick Up /node" = SubResource( 5 )
+"states/Running Pick Up /position" = Vector2( 882, 54 )
+"states/Running left/node" = SubResource( 13 )
+"states/Running left/position" = Vector2( 384, 237 )
+"states/Running right/node" = SubResource( 15 )
+"states/Running right/position" = Vector2( 827, 232 )
+"states/Running throw/node" = SubResource( 6 )
+"states/Running throw/position" = Vector2( 345, 64 )
+"states/Simple Throwing/node" = SubResource( 9 )
+"states/Simple Throwing/position" = Vector2( 377, 314.786 )
+transitions = [ "Running Jump", "Running", SubResource( 29 ), "Running", "Running Jump", SubResource( 32 ), "Idle", "Simple Throwing", SubResource( 43 ), "Simple Throwing", "Idle", SubResource( 44 ), "Running", "Running Pick Up ", SubResource( 45 ), "Running Pick Up ", "Running", SubResource( 46 ), "Running throw", "Running", SubResource( 47 ), "Running", "Running throw", SubResource( 48 ), "Idle", "Running Backward", SubResource( 49 ), "Running Backward", "Idle", SubResource( 50 ), "Running right", "Idle", SubResource( 51 ), "Idle", "Running right", SubResource( 52 ), "Running left", "Idle", SubResource( 53 ), "Idle", "Running left", SubResource( 54 ), "Idle", "Running", SubResource( 55 ), "Running", "Idle", SubResource( 56 ), "Idle", "Jumping", SubResource( 58 ), "Jumping", "Idle", SubResource( 59 ) ]
+start_node = "Idle"
+graph_offset = Vector2( 0, 98.21 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
+[node name="KinematicBody" type="KinematicBody"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+script = ExtResource( 2 )
+Animationtree = NodePath("AnimationTree")
+
+[node name="XBAlpha" parent="." instance=ExtResource( 1 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.0249905, 0.999688, 0, -0.999688, 0.0249905, 0, 0.840255, 0 )
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, -0.0122613, 1.54831, 0.289636 )
+fov = 78.9
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 17 )
+anim_player = NodePath("../XBAlpha/AnimationPlayer")
+active = true
+root_motion_track = NodePath("Armature/Skeleton:RootMotion")
+parameters/playback = SubResource( 18 )
+
+[editable path="XBAlpha"]
