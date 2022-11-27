@@ -91,3 +91,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.94072, 1.51798, 14.6919 )
 
 [node name="RigidBody" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57701, 0.392089, 5.66463 )
+
+[node name="Players" type="Spatial" parent="."]

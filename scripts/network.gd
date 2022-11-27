@@ -6,6 +6,9 @@ const MAX_CLIENTS = 6
 var client = null
 var server = null
 
+var players = {}
+
+
 var ip_address = "127.0.0.1"
 func _ready():
 	get_tree().connect("connected_to_server", self , "_connected_to_server" )
@@ -19,6 +22,7 @@ func create_server():
 	server = NetworkedMultiplayerENet.new()
 	server.create_server(DEFAULT_PORT, MAX_CLIENTS)
 	get_tree().set_network_peer(server)
+	players[1] = get_tree().get_network_unique_id()
 	
 func join_server():
 	print("Joining server")
