@@ -30,7 +30,7 @@ transform = Transform( 0.962718, 0.2655, 0.0518267, -0.2563, 0.956526, -0.139173
 physics_interpolation_mode = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.0249905, 0.999688, 0, -0.999688, 0.0249905, 0, 0.840255, 0 )
+transform = Transform( 1, 0, 0, 0, 0.0249905, 0.999688, 0, -0.999688, 0.0249905, 0, 0.95, 0 )
 shape = SubResource( 1 )
 
 [node name="PickArea" type="Area" parent="."]
