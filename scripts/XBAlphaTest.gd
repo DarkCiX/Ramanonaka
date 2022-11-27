@@ -2,6 +2,15 @@ extends KinematicBody
 
 export (NodePath) var Animationtree
 
+#test
+export (NodePath) onready var network_tick_rate = get_node(network_tick_rate)
+export (NodePath) onready var movement_tween = get_node(movement_tween)
+
+var puppet_position = Vector3()
+var puppet_velocity = Vector3()
+var puppet_rotation = Vector2()
+#fin test
+
 onready var _anim_tree = get_node(Animationtree)
 onready var cam = $Camera
 onready var raycast = $Camera/RayCast
@@ -326,3 +335,17 @@ func _process(delta):
 func set_Blending(animation, nextanimation, time):
 	$XBAlpha_In_place/AnimationPlayer.set_blend_time(animation, nextanimation , time)
 
+puppet func update_state(puppet_position,puppet_velocity,puppet_rotation):
+	puppet_position = puppet_position
+	puppet_velocity = puppet_velocity
+	puppet_rotation = puppet_rotation
+	
+	movement_tween.interpolate_property(self, "global_transform", global_transform, Transform(global_transform.basis, puppet_position), 0.1)
+	movement_tween.start()
+
+
+func _on_NetworkTickRate_timeout():
+	if is_network_master():
+		rpc_unreliable("update_state", global_transform.origin, velocity, Vector2(cam.rotate.x, rotation.y))
+	else:
+		network_tick_rate.stop()
