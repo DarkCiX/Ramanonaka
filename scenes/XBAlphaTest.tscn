@@ -14,8 +14,11 @@ script = ExtResource( 2 )
 
 [node name="XBAlpha_In_place" parent="." instance=ExtResource( 1 )]
 
-[node name="BoneAttachment" type="BoneAttachment" parent="XBAlpha_In_place/Armature/Skeleton" index="2"]
-transform = Transform( -0.282545, 0.116313, 0.952176, 0.958272, -0.0106908, 0.285659, 0.0434055, 0.993155, -0.108438, -0.137517, 0.980875, 0.380404 )
+[node name="Skeleton" parent="XBAlpha_In_place/Armature" index="0"]
+bones/35/bound_children = [ NodePath("BoneAttachment") ]
+
+[node name="BoneAttachment" type="BoneAttachment" parent="XBAlpha_In_place/Armature/Skeleton" index="1"]
+transform = Transform( 6.22541e-07, -1, 8.57189e-05, -1.97195e-07, -8.58251e-05, -1, 1, 6.29539e-07, -2.03634e-07, -0.737829, 1.43559, -0.0617134 )
 bone_name = "RightHand"
 
 [node name="Pick_Point" type="Position3D" parent="XBAlpha_In_place/Armature/Skeleton/BoneAttachment"]
@@ -25,7 +28,7 @@ transform = Transform( 0.962718, 0.2655, 0.0518267, -0.2563, 0.956526, -0.139173
 physics_interpolation_mode = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.0249905, 0.999688, 0, -0.999688, 0.0249905, 0, 0.840255, 0 )
+transform = Transform( 1, 0, 0, 0, 0.0249905, 0.999688, 0, -0.999688, 0.0249905, 0, 0.95, 0 )
 shape = SubResource( 1 )
 
 [node name="PickArea" type="Area" parent="."]

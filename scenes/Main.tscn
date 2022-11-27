@@ -86,7 +86,7 @@ shape = SubResource( 9 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.94072, 1.51798, 14.6919 )
 
 [node name="KinematicBody" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.39271, 0.200025, 3.20724 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.39271, 0.189919, 3.20724 )
 
 [node name="RigidBody" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57701, 0.392089, 5.66463 )
