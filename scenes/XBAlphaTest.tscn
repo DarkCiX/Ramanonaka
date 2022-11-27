@@ -11,16 +11,19 @@ height = 1.1
 
 [node name="KinematicBody" type="KinematicBody"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 network_tick_rate = NodePath("NetworkTickRate")
 movement_tween = NodePath("MovementTween")
 
 [node name="XBAlpha_In_place" parent="." instance=ExtResource( 1 )]
 
 [node name="Skeleton" parent="XBAlpha_In_place/Armature" index="0"]
-bones/34/bound_children = [ NodePath("BoneAttachment") ]
+bones/35/bound_children = [ NodePath("BoneAttachment") ]
 
-[node name="BoneAttachment" type="BoneAttachment" parent="XBAlpha_In_place/Armature/Skeleton" index="2"]
-transform = Transform( 8.22664e-07, -1, 8.57059e-05, -2.89339e-07, -8.55997e-05, -1, 1, 7.67261e-07, -2.75087e-07, -0.737829, 1.43559, -0.0617133 )
+[node name="BoneAttachment" type="BoneAttachment" parent="XBAlpha_In_place/Armature/Skeleton" index="1"]
+transform = Transform( -0.0108954, 0.427489, 0.903955, 0.495725, 0.787407, -0.366397, -0.868411, 0.444121, -0.220496, -0.0819334, 1.23847, 0.467076 )
 bone_name = "RightHand"
 
 [node name="Pick_Point" type="Position3D" parent="XBAlpha_In_place/Armature/Skeleton/BoneAttachment"]
@@ -39,18 +42,20 @@ shape = SubResource( 1 )
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0.00119781, 0.0103073, -0.00268555 )
 shape = SubResource( 2 )
 
+[node name="NetworkTickRate" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="MovementTween" type="Tween" parent="."]
+
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0948252, 1.69662, 0.548979 )
+transform = Transform( -0.996599, 0.0623012, -0.0539271, 0.0448242, 0.959064, 0.279619, 0.0691401, 0.276251, -0.958595, -0.124605, 1.55815, 0.566128 )
 current = true
 fov = 78.9
 
 [node name="RayCast" type="RayCast" parent="Camera"]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.03853e-08, 0.00308561, -0.347568 )
 cast_to = Vector3( 0, -1, -25 )
-
-[node name="NetworkTickRate" type="Timer" parent="."]
-
-[node name="MovementTween" type="Tween" parent="."]
 
 [connection signal="timeout" from="NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
 

@@ -15,12 +15,14 @@ remote func _instance_player(id):
 	
 	var player_instance = player.instance()
 	player_instance.set_network_master(id)
+	
 	player_instance.name = str(id)
 	$Players.add_child(player_instance)
 	player_instance.global_transform.origin = Vector3(0,15,0)
 
 func _player_connected(id):
 	print("Player" + str(id) + "connected")
+	
 	_instance_player(id)
 	
 

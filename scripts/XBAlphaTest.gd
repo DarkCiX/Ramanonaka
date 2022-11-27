@@ -1,17 +1,16 @@
 extends KinematicBody
 
-export (NodePath) var Animationtree
+
 
 #test
 export (NodePath) onready var network_tick_rate = get_node(network_tick_rate)
 export (NodePath) onready var movement_tween = get_node(movement_tween)
 
-var puppet_position = Vector3()
+var puppet_position = Vector3(0,15,0)
 var puppet_velocity = Vector3()
 var puppet_rotation = Vector2()
 #fin test
 
-onready var _anim_tree = get_node(Animationtree)
 onready var cam = $Camera
 onready var raycast = $Camera/RayCast
 onready var pickpoint = $XBAlpha_In_place/Armature/Skeleton/BoneAttachment/Pick_Point
@@ -44,23 +43,17 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		var movement = event.relative
-		cam.rotation.x += -deg2rad(movement.y * sens)  
-		cam.rotation.x = clamp(cam.rotation.x, deg2rad(-90) , deg2rad(90))
-		rotation.y += -deg2rad(movement.x * sens)
-		
-
+	if is_network_master():
+		if event is InputEventMouseMotion:
+			var movement = event.relative
+			cam.rotation.x += -deg2rad(movement.y * sens)  
+			cam.rotation.x = clamp(cam.rotation.x, deg2rad(-90) , deg2rad(90))
+			rotation.y += -deg2rad(movement.x * sens)
+			
+	
+			
 func _process(delta):
 	
-	
-	if Input.is_action_just_pressed("switch_cam"):
-		if cam.current:
-			cam.current = false
-			get_parent().get_node("Camera").current = true
-		else:
-			cam.current = true
-			get_parent().get_node("Camera").current = false
 			
 	direction = Vector3()
 	
@@ -120,18 +113,22 @@ func _process(delta):
 				
 		elif Input.is_action_just_released("right"):
 				set_idle_anim()
+		
+		if Input.is_action_just_pressed("pick up"):
+			pick()
+		
+		if Input.is_action_just_pressed("throw"):
+			throw()
 	else:
 		#global_transform.origin = puppet_position
+		
 		velocity.x = puppet_velocity.x 
 		velocity.z = puppet_velocity.z 
 		
 		if !movement_tween.is_active():
 			velocity = move_and_slide(velocity,Vector3.UP,true)
-	if Input.is_action_just_pressed("pick up"):
-		pick()
-		
-	if Input.is_action_just_pressed("throw"):
-		throw()
+			
+	
 		
 	$XBAlpha_In_place/AnimationPlayer.play(animation_name)
 	
@@ -302,12 +299,12 @@ func jump():
 		speed = old_speed
 		set_idle_anim()
 
-puppet func update_state(puppet_position,puppet_velocity,puppet_rotation):
-	puppet_position = puppet_position
-	puppet_velocity = puppet_velocity
-	puppet_rotation = puppet_rotation
+puppet func update_state(p_position,p_velocity,p_rotation):
+	puppet_position = p_position
+	puppet_velocity = p_velocity
+	puppet_rotation = p_rotation
 	
-	movement_tween.interpolate_property(self, "global_transform", global_transform, Transform(global_transform.basis, puppet_position), 0.1)
+	movement_tween.interpolate_property(self, "global_transform", global_transform, Transform(global_transform.basis, p_position), 0.1)
 	movement_tween.start()
 
 
