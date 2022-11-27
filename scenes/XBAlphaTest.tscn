@@ -15,10 +15,10 @@ script = ExtResource( 2 )
 [node name="XBAlpha_In_place" parent="." instance=ExtResource( 1 )]
 
 [node name="Skeleton" parent="XBAlpha_In_place/Armature" index="0"]
-bones/35/bound_children = [ NodePath("BoneAttachment") ]
+bones/34/bound_children = [ NodePath("BoneAttachment") ]
 
-[node name="BoneAttachment" type="BoneAttachment" parent="XBAlpha_In_place/Armature/Skeleton" index="1"]
-transform = Transform( 6.22541e-07, -1, 8.57189e-05, -1.97195e-07, -8.58251e-05, -1, 1, 6.29539e-07, -2.03634e-07, -0.737829, 1.43559, -0.0617134 )
+[node name="BoneAttachment" type="BoneAttachment" parent="XBAlpha_In_place/Armature/Skeleton" index="2"]
+transform = Transform( 8.22664e-07, -1, 8.57059e-05, -2.89339e-07, -8.55997e-05, -1, 1, 7.67261e-07, -2.75087e-07, -0.737829, 1.43559, -0.0617133 )
 bone_name = "RightHand"
 
 [node name="Pick_Point" type="Position3D" parent="XBAlpha_In_place/Armature/Skeleton/BoneAttachment"]
