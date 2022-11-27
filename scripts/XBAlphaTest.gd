@@ -82,46 +82,51 @@ func _process(delta):
 		AmIFalling = false
 		verify_fall()
 		
+	if is_network_master():
+		if Input.is_action_just_pressed("jump"):
+			jump()
+			
 
-	if Input.is_action_just_pressed("jump"):
-		jump()
+		if Input.is_action_pressed("forward") : 
+			direction += transform.basis.z
+			if AmIJumping == false && AmIFalling == false:
+				set_forward_anim()
+				
+		elif Input.is_action_just_released("forward"):
+				set_idle_anim()
+
+
+		elif Input.is_action_pressed("back"):
+			direction -= transform.basis.z
+			
+			if AmIJumping == false && AmIFalling == false:
+				set_backward_anim()
+				
+		elif Input.is_action_just_released("back"):
+				set_idle_anim()
+
+		if Input.is_action_pressed("left"):
+			direction += transform.basis.x
+			if AmIJumping == false && AmIFalling == false:
+				set_left_anim()
+				
+		elif Input.is_action_just_released("left"):
+				set_idle_anim()
+
+		elif Input.is_action_pressed("right"):
+			direction -= transform.basis.x
+			if AmIJumping == false && AmIFalling == false:
+				set_right_anim()
+				
+		elif Input.is_action_just_released("right"):
+				set_idle_anim()
+	else:
+		#global_transform.origin = puppet_position
+		velocity.x = puppet_velocity.x 
+		velocity.z = puppet_velocity.z 
 		
-	
-	if Input.is_action_pressed("forward") : 
-		direction += transform.basis.z
-		if AmIJumping == false && AmIFalling == false:
-			set_forward_anim()
-			
-	elif Input.is_action_just_released("forward"):
-			set_idle_anim()
-
-
-	elif Input.is_action_pressed("back"):
-		direction -= transform.basis.z
-		
-		if AmIJumping == false && AmIFalling == false:
-			set_backward_anim()
-			
-	elif Input.is_action_just_released("back"):
-			set_idle_anim()
-
-	if Input.is_action_pressed("left"):
-		direction += transform.basis.x
-		if AmIJumping == false && AmIFalling == false:
-			set_left_anim()
-			
-	elif Input.is_action_just_released("left"):
-			set_idle_anim()
-
-	elif Input.is_action_pressed("right"):
-		direction -= transform.basis.x
-		if AmIJumping == false && AmIFalling == false:
-			set_right_anim()
-			
-	elif Input.is_action_just_released("right"):
-			set_idle_anim()
-
-
+		if !movement_tween.is_active():
+			velocity = move_and_slide(velocity,Vector3.UP,true)
 	if Input.is_action_just_pressed("pick up"):
 		pick()
 		
@@ -308,9 +313,10 @@ puppet func update_state(puppet_position,puppet_velocity,puppet_rotation):
 
 func _on_NetworkTickRate_timeout():
 	if is_network_master():
-		rpc_unreliable("update_state", global_transform.origin, velocity, Vector2(cam.rotate.x, rotation.y))
+		rpc_unreliable("update_state", global_transform.origin, velocity, Vector2(cam.rotation.x, rotation.y))
 	else:
 		network_tick_rate.stop()
+		
 func verify_fall():
 	if AmIFalling == true:
 		set_Blending(animation_name , "Falling Idle-loop" , 0.2)
